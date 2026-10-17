@@ -1,0 +1,1068 @@
+{
+ "name": "NieR:Automata",
+ "name_ko": "니어 오토마타",
+ "exe": "NieRAutomata.exe",
+ "steam_input": "on",
+ "engine": "wwise",
+ "event_file": "C:\\Users\\Public\\dshaptics\\events.log",
+ "native": {
+  "dll": "nier/dshaptics_wwise_wide.dll",
+  "event_ids": "event_ids.json",
+  "main": true
+ },
+ "player": "^(pl\\d|core_pl|wp)",
+ "trigger_rest": {},
+ "trigger_cooldown": {
+  "L2": {"after": "^core_pl_AS_(black_spear_shot|small_bom_shot|wire_shot|pod_throw_wsh|pod_throw_ring_laser_shot|barrier_start|black_Whirling_start|black_hand_gene|black_gluttony_start|black_illusion_lv\\d|black_exec_start|gravity_bom_loop_lv\\d|slow_bom_loop_lv\\d|hologram_loop|body_recovery_loop|pod_ride_start)$",
+         "seconds": 12, "ready": "^core_pl_AS_start_up$", "mute": ["pod_program_charge"]}
+ },
+ "triggers": {
+  "pod_program_charge": {
+   "match": "^core_pl_AS_start_loop$",
+   "until": "^Stop_core_pl_AS_start_loop$|^core_pl_AS_start_up$",
+   "pad": "L2",
+   "effect": "vibrate",
+   "start": 2,
+   "amp": 1,
+   "hz": 15,
+   "hold": 8
+  },
+  "pod_program_ready": {
+   "match": "^core_pl_AS_start_up$",
+   "until": "^Stop_core_pl_AS_start_loop$",
+   "pad": "L2",
+   "effect": "vibrate",
+   "start": 2,
+   "amp": 3,
+   "hz": 15,
+   "hold": 8
+  },
+  "pod_program_fire": {
+   "match": "^core_pl_AS_(black_spear_shot|small_bom_shot|wire_shot|pod_throw_wsh|pod_throw_ring_laser_shot|barrier_start|black_Whirling_start|black_hand_gene|black_gluttony_start|black_illusion_lv\\d|black_exec_start|gravity_bom_loop_lv\\d|slow_bom_loop_lv\\d|hologram_loop|body_recovery_loop|pod_ride_start)$",
+   "pad": "L2",
+   "effect": "vibrate",
+   "amp": 8,
+   "hz": 8,
+   "hold": 0.18
+  },
+  "pod_gatling": {
+   "match": "^wp3000_valcan_shot(_lv\\d)?$",
+   "pad": "R2",
+   "effect": "vibrate",
+   "amp": 2,
+   "hz": 14,
+   "hold": 0.3,
+   "held": ["r2"]
+  },
+  "pod_laser_charge": {
+   "match": "^wp3000_lazer_charge$",
+   "until": "^stop_wp3000_lazer_charge$|^wp3000_lazer_shot",
+   "pad": "R2",
+   "effect": "vibrate",
+   "start": 2,
+   "amp": 1,
+   "hz": 15,
+   "hold": 8,
+   "stages": [[1.0, {"amp": 2}], [2.0, {"amp": 3}]],
+   "held": ["r2"]
+  },
+  "pod_laser_fire": {
+   "match": "^wp3000_lazer_shot(_lv[234])?$",
+   "pad": "R2",
+   "effect": "vibrate",
+   "amp": 7,
+   "hz": 30,
+   "hold": 0.22,
+   "held": ["r2"]
+  },
+  "pod_laser": {
+   "match": "^wp3000_lazer_shot_lv\\d_loop$",
+   "until": "^Stop_wp3000_lazer_shot_lv\\d_loop$",
+   "pad": "R2",
+   "effect": "vibrate",
+   "amp": 3,
+   "hz": 20,
+   "hold": 10,
+   "held": ["r2"]
+  },
+  "pod_missile": {
+   "match": "^wp3000_missile_shot_lv\\d$",
+   "pad": "R2",
+   "effect": "vibrate",
+   "amp": 8,
+   "hz": 6,
+   "hold": 0.22,
+   "held": ["r2"]
+  },
+  "just_evade": {
+   "match": "^pl\\d+_just_avoid|^core_pl_avoidance$",
+   "pad": "R2",
+   "effect": "vibrate",
+   "amp": 8,
+   "hz": 9,
+   "hold": 0.13
+  }
+ },
+ "source": {
+  "type": "wwise_bnk",
+  "steam_dir": "NieRAutomata",
+  "data": "data",
+  "event_ids": "event_ids.json",
+  "trees": "trees.json",
+  "hap": "hap",
+  "spk": "spk",
+  "steps": {
+   "events": "^pl\\d{4}_step_(run|dash)_[LR]$",
+   "table": "layers_step_switch.json",
+   "dir": "step",
+   "init": "sound/Init.bnk"
+  },
+  "scenes": {
+   "rate": 4000,
+   "target": 0.35,
+   "pct": 90,
+   "keep": 0.15,
+   "cues": "^ev\\d+_Se$",
+   "skip": "$^",
+   "trees": "trees_seq.json",
+   "dir": "seq"
+  },
+  "speaker": "^pl\\d+_just_avoid|^core_pl_avoidance$|core_pl_PS_Repel|^core_pod_window_(call|radio)$|^core_mail_call$"
+ },
+ "steps": {
+  "layers": "layers_step_switch.json",
+  "dir": "step",
+  "events": "^pl\\d{4}_step_(run|dash)_[LR]$",
+  "plain": "rules",
+  "surface_peak": {
+   "4044309641": 0.3,
+   "3012164052": 0.3,
+   "4205684356": 0.3,
+   "602983346": 0.28,
+   "1714119194": 0.28,
+   "1481308918": 0.28,
+   "3128458846": 0.28,
+   "2042950699": 0.26,
+   "1409332964": 0.26,
+   "673286832": 0.26,
+   "2500264746": 0.28,
+   "3719604641": 0.26,
+   "2830182487": 0.28,
+   "1457584496": 0.28,
+   "2440764485": 0.28
+  },
+  "surface_shape": {
+   "2500264746": {"band": [40, 140], "ms": 260},
+   "2830182487": {"band": [40, 140], "ms": 260},
+   "1457584496": {"band": [40, 140], "ms": 260},
+   "2440764485": {"band": [40, 140], "ms": 260},
+   "2042950699": {"band": [180, 450], "ms": 90},
+   "1409332964": {"band": [180, 450], "ms": 90},
+   "673286832": {"band": [180, 450], "ms": 90}
+  }
+ },
+ "cutscene": {
+  "gain": 2.0,
+  "skip_grace": 2.0,
+  "max_s": 300,
+  "match": "impact|hit|crash|explo|break|slam|fall|door|gun|clash|stab|thud",
+  "wave": "seq",
+  "gap": 0.12,
+  "end": "^ev\\d+_End$|^se_movie_out$|^SE_Event_Skip$",
+  "tracks": "trees_seq.json",
+  "dir": "seq"
+ },
+ "master": 1.0,
+ "duck": 0.3,
+ "gap": 0.05,
+ "combat_hold": 6.0,
+ "waves": {
+  "impact": [
+   [
+    85,
+    60,
+    0.5,
+    24
+   ]
+  ],
+  "smash": [
+   [
+    60,
+    110,
+    0.8,
+    45
+   ]
+  ],
+  "pierce": [
+   [
+    250,
+    10,
+    0.55,
+    3
+   ]
+  ],
+  "blunt": [
+   [
+    55,
+    90,
+    0.45,
+    40
+   ]
+  ],
+  "guard": [
+   [
+    70,
+    90,
+    0.45,
+    35
+   ]
+  ],
+  "pguard": [
+   [
+    260,
+    18,
+    1.0,
+    5
+   ],
+   [
+    150,
+    25,
+    0.8,
+    8
+   ],
+   [
+    70,
+    130,
+    0.75,
+    55
+   ]
+  ],
+  "fatal": [
+   [
+    55,
+    90,
+    1.0,
+    40
+   ],
+   30,
+   [
+    45,
+    300,
+    0.85,
+    140
+   ]
+  ],
+  "stagger": [
+   [
+    200,
+    15,
+    0.8,
+    5
+   ],
+   [
+    70,
+    120,
+    0.8,
+    50
+   ]
+  ],
+  "hurt": [
+   [
+    70,
+    50,
+    0.6,
+    25
+   ]
+  ],
+  "struck": [
+   [
+    70,
+    60,
+    0.9,
+    30
+   ],
+   [
+    45,
+    140,
+    0.6,
+    70
+   ]
+  ],
+  "down": [
+   [
+    50,
+    120,
+    0.9,
+    50
+   ],
+   20,
+   [
+    40,
+    280,
+    0.6,
+    130
+   ]
+  ],
+  "death": [
+   [
+    50,
+    150,
+    1.0,
+    70
+   ],
+   40,
+   {
+    "swell": [
+     40,
+     900,
+     0.5
+    ]
+   }
+  ],
+  "swing": [
+   [
+    140,
+    25,
+    0.15,
+    10
+   ]
+  ],
+  "lunge": [
+   [
+    60,
+    90,
+    0.35,
+    40
+   ]
+  ],
+  "dodge": [
+   [
+    130,
+    30,
+    0.35,
+    12
+   ],
+   50,
+   [
+    130,
+    30,
+    0.3,
+    12
+   ]
+  ],
+  "land": [
+   [
+    55,
+    160,
+    0.6,
+    65
+   ]
+  ],
+  "step": [
+   [
+    145,
+    35,
+    0.1,
+    12
+   ]
+  ],
+  "ground": [
+   [
+    65,
+    35,
+    0.15,
+    14
+   ]
+  ],
+  "splash": [
+   [
+    110,
+    40,
+    0.12,
+    15
+   ]
+  ],
+  "charge": [
+   [
+    100,
+    30,
+    0.4,
+    12
+   ],
+   45,
+   [
+    100,
+    35,
+    0.55,
+    14
+   ]
+  ],
+  "heal": [
+   {
+    "swell": [
+     70,
+     600,
+     0.35
+    ]
+   }
+  ],
+  "buff": [
+   {
+    "swell": [
+     90,
+     400,
+     0.4
+    ]
+   }
+  ],
+  "uitick": [
+   [
+    220,
+    8,
+    0.15,
+    3
+   ]
+  ],
+  "click": [
+   [
+    180,
+    12,
+    0.4,
+    5
+   ],
+   30,
+   [
+    110,
+    40,
+    0.35,
+    15
+   ]
+  ],
+  "thud": [
+   [
+    55,
+    260,
+    0.4,
+    110
+   ]
+  ],
+  "break": [
+   [
+    80,
+    120,
+    0.5,
+    50
+   ]
+  ],
+  "boom": [
+   [
+    45,
+    220,
+    1.0,
+    120
+   ]
+  ],
+  "blast": [
+   [
+    50,
+    120,
+    1.0,
+    50
+   ],
+   [
+    40,
+    250,
+    0.6,
+    120
+   ]
+  ],
+  "seq": [
+   [
+    60,
+    160,
+    0.3,
+    70
+   ]
+  ],
+  "whoosh": [
+   [
+    120,
+    60,
+    0.35,
+    25
+   ]
+  ],
+  "soft": [
+   {
+    "swell": [
+     120,
+     200,
+     0.2
+    ]
+   }
+  ],
+  "warn": [
+   {
+    "swell": [
+     120,
+     200,
+     0.2
+    ]
+   }
+  ],
+  "jump": [
+   {
+    "swell": [
+     120,
+     200,
+     0.2
+    ]
+   }
+  ],
+  "tick": [
+   [
+    200,
+    15,
+    0.3,
+    5
+   ]
+  ],
+  "patter": [
+   [
+    180,
+    14,
+    0.3,
+    6
+   ]
+  ],
+  "spatter": [
+   [
+    230,
+    8,
+    0.25,
+    4
+   ]
+  ],
+  "step_dash": [
+   [
+    145,
+    35,
+    0.14,
+    12
+   ]
+  ],
+  "brush": [
+   {
+    "curve": [
+     [
+      320,
+      [
+       [
+        0,
+        0
+       ],
+       [
+        45,
+        0.13
+       ],
+       [
+        120,
+        0.09
+       ],
+       [
+        210,
+        0
+       ]
+      ]
+     ],
+     [
+      480,
+      [
+       [
+        0,
+        0
+       ],
+       [
+        45,
+        0.06
+       ],
+       [
+        210,
+        0
+       ]
+      ]
+     ]
+    ]
+   }
+  ],
+  "slide": [
+   [
+    170,
+    60,
+    0.18,
+    40
+   ]
+  ]
+ },
+ "rules": [
+  {
+   "match": "^Stop_"
+  },
+  {
+   "match": "^pl\\d+_just_avoid|core_pl_PS_Repel|^core_pl_avoidance$",
+   "wave": "pguard",
+   "who": "any",
+   "_slot": "parry",
+   "combat": true
+  },
+  {
+   "match": "core_pl_PS_critical_(hit|bom)|pl0000_(finish_hit|kick_finish_impact|upper_finish_\\w+_impact|slash_finish_2nd_end)",
+   "wave": "fatal",
+   "who": "any",
+   "_slot": "finisher",
+   "combat": true
+  },
+  {
+   "match": "em_common_shield_break",
+   "wave": "stagger",
+   "who": "any",
+   "_slot": "stagger",
+   "combat": true
+  },
+  {
+   "match": "core_(small|big)_sword_guard|core_shot_guard|wp1700_shot_guard",
+   "wave": "guard",
+   "who": "any",
+   "_slot": "guard",
+   "combat": true
+  },
+  {
+   "match": "pl0000_death_down|core_stg_pl_death_bom|core_hak_pl_bom",
+   "wave": "death",
+   "who": "any",
+   "_slot": "death",
+   "combat": true
+  },
+  {
+   "match": "core_pl_down_(impact|bound|nobound)",
+   "wave": "down",
+   "who": "any",
+   "_slot": "down",
+   "combat": true
+  },
+  {
+   "match": "pl0000_vo_h_dmg|pl0000_unit_l_dmg|wp1700_EMP_unit_damage_big",
+   "wave": "struck",
+   "who": "any",
+   "_slot": "struck",
+   "combat": true,
+   "synth": true
+  },
+  {
+   "match": "pl0000_vo_[lm]_dmg|pl0000_unit_s_dmg|core_pl_hack_dmg|core_stg_pl_dmg_error$|core_hak_dmg_wall",
+   "wave": "hurt",
+   "who": "any",
+   "_slot": "hurt",
+   "combat": true,
+   "synth": true
+  },
+  {
+   "match": "core_big_sword_hit|core_pl_blow_hit",
+   "wave": "smash",
+   "who": "any",
+   "_slot": "hit_heavy",
+   "combat": true
+  },
+  {
+   "match": "core_spear_hit|core_pl_AS_black_spear_hit$",
+   "wave": "pierce",
+   "who": "any",
+   "_slot": "hit_pierce",
+   "combat": true
+  },
+  {
+   "match": "core_(emil_)?nackle_hit|core_bare_hand_hit",
+   "wave": "blunt",
+   "who": "any",
+   "_slot": "hit_blunt",
+   "combat": true
+  },
+  {
+   "match": "core_small_sword_hit|core_blade_hit|core_sword_hit_animal|wp1700_blade_hit",
+   "wave": "impact",
+   "who": "any",
+   "_slot": "hit",
+   "combat": true
+  },
+  {
+   "match": "em_common_death_bom_l|core_pl_destruct_exp|core_pl_berserk_exp|wp3000_common_bom|_missile_explo|pl0010_missile_bom|core_pl_weapon_skill_(comb_bom|sonicbom)|gravity_bom_exp",
+   "wave": "boom",
+   "who": "any",
+   "_slot": "boom"
+  },
+  {
+   "match": "em_common_death_bom_[sm]|core_stg_em_bom|core_hak_em(core)?_bom|wp160\\d_death_bom|small_bom_exp|slow_bom_exp",
+   "wave": "blast",
+   "who": "any",
+   "_slot": "blast"
+  },
+  {
+   "match": "^wp\\w+_\\w*impact|core_barehand_fallatk_impact",
+   "wave": "thud",
+   "who": "any",
+   "_slot": "slam",
+   "player_control": true
+  },
+  {
+   "match": "core_pl_charge_start|core_pl_charge_end$|wp3000_lazer_charge|pl0000_finish_charge|pl0010_blade_charge",
+   "wave": "charge",
+   "who": "any",
+   "_slot": "charge",
+   "player_control": true
+  },
+  {
+   "match": "wp3000_valcan_shot(_lv\\d)?$|pl0010_bullet_shot|core_pl_shot_stg|core_hak_pl_shot$|wp1600_default_shot|wp1700_EMP_unit_default_shot",
+   "wave": "patter",
+   "who": "any",
+   "_slot": "stream",
+   "gap": 0.12
+  },
+  {
+   "match": "wp3000_(lazer_shot$|lazer_shot_lv\\d$|missile_shot_lv|vacuum_shot|avoid_shot$)|pl0010_missile_shot$|pl0010_flightform_missile_shot|core_pl_missile_shot_stg|core_pl_AS_(wire_shot|black_spear_shot$|small_bom_shot$)",
+   "wave": "tick",
+   "who": "any",
+   "_slot": "shot"
+  },
+  {
+   "match": "core_pl_gun_hit|core_hak_pl_shot_hit$|wp1700_stg_shot_hit",
+   "wave": "spatter",
+   "who": "any",
+   "_slot": "shot_hit",
+   "gap": 0.15
+  },
+  {
+   "match": "em\\w*_laser_tele_(L|XL)|core_stg_em_laser_m_charge|em_common_laser_tele_(L|XL)",
+   "wave": "warn",
+   "who": "any",
+   "_slot": "telegraph"
+  },
+  {
+   "match": "em\\w*_laser_shot_(L|XL)|core_stg_em_laser_m_fir",
+   "wave": "thud",
+   "who": "any",
+   "_slot": "beam"
+  },
+  {
+   "match": "core_pl_berserk_start|core_status_up|core_level_up",
+   "wave": "buff",
+   "who": "any",
+   "_slot": "buff"
+  },
+  {
+   "match": "recovery_items_use|core_pl_body_Recover|core_pl_weapon_skill_cure",
+   "wave": "heal",
+   "who": "any",
+   "_slot": "heal"
+  },
+  {
+   "match": "^wpf\\w+_(jump_atk_wsh|dash_atk|combo_swing_0[5-7])|core_barehand_(Dropkick|fallatk)_wsh",
+   "wave": "lunge",
+   "who": "any",
+   "_slot": "swing_heavy",
+   "combat": true,
+   "player_control": true
+  },
+  {
+   "match": "^wpf\\w+_|core_barehand_\\w+_wsh|pl0000_spatk_swing|pl0000_\\w*finish_wsh|pl0010_blade_swing|pl0000_unit_swing_wsh",
+   "wave": "swing",
+   "who": "any",
+   "_slot": "swing",
+   "combat": true,
+   "player_control": true
+  },
+  {
+   "match": "^pl\\d+_avoidance|pl0010_flightform_avoidance",
+   "wave": "dodge",
+   "who": "any",
+   "_slot": "dodge",
+   "combat": true,
+   "player_control": true
+  },
+  {
+   "match": "pl0000_jump_(first|second)|pl0000_0080_jump",
+   "wave": "jump",
+   "who": "any",
+   "_slot": "jump",
+   "player_control": true
+  },
+  {
+   "match": "core_pl_fall_land|pl0000_land_roll",
+   "wave": "land",
+   "who": "any",
+   "_slot": "land",
+   "player_control": true
+  },
+  {
+   "match": "^pl0000_step_walk",
+   "_slot": "step_walk",
+   "player_control": true,
+   "synth": true
+  },
+  {
+   "match": "^pl0000_step_dash",
+   "wave": "step_dash",
+   "who": "any",
+   "_slot": "step_dash",
+   "player_control": true,
+   "synth": true
+  },
+  {
+   "match": "^pl0000_step_run",
+   "wave": "step",
+   "who": "any",
+   "_slot": "step",
+   "combat_only": true,
+   "player_control": true,
+   "synth": true
+  },
+  {
+   "match": "core_pl_Mov_BushPass",
+   "wave": "brush",
+   "who": "any",
+   "_slot": "brush",
+   "player_control": true
+  },
+  {
+   "match": "core_dropitem_get|core_money_get|core_item_found",
+   "wave": "soft",
+   "who": "any",
+   "_slot": "touch"
+  },
+  {
+   "match": "core_pl_weapon_change|core_wepon_equip|core_pl_weapon_get",
+   "wave": "click",
+   "who": "any",
+   "_slot": "click"
+  }
+ ],
+ "rough": {
+  "impact": "hit",
+  "smash": "hit_m",
+  "pierce": "stab",
+  "blunt": "blunt",
+  "guard": "guard",
+  "pguard": "pguard",
+  "fatal": "fatal",
+  "stagger": "stagger",
+  "hurt": "hit",
+  "struck": "hit",
+  "down": "down",
+  "death": "knockdown",
+  "swing": "swing",
+  "lunge": "swing_l",
+  "dodge": "dash",
+  "land": "land_heavy",
+  "step": "step",
+  "ground": "step",
+  "splash": "step_water",
+  "charge": "charged",
+  "heal": "heal",
+  "buff": "buff",
+  "uitick": "uitick",
+  "click": "click",
+  "thud": "thud",
+  "break": "hit_wood",
+  "boom": "blast",
+  "blast": "blast",
+  "seq": "hit_s",
+  "whoosh": "swing_l",
+  "soft": "item",
+  "warn": "riser",
+  "jump": "jump",
+  "tick": "shot_s",
+  "patter": "shot_s",
+  "spatter": "hit_s",
+  "step_dash": "step",
+  "brush": "move_light",
+  "slide": "slide"
+ },
+ "style": {"rough": "hit", 
+  "hit": "sb",
+  "top": "^core_pl_avoidance$|^pl\\d+_just_avoid|core_pl_PS_Repel|^pguard$|core_pl_PS_critical_(hit|bom)|pl0000_(finish_hit|kick_finish_impact|upper_finish_\\w+_impact|slash_finish_2nd_end)|^fatal$|em_common_shield_break|^stagger$",
+  "skip": "^(buff|charge|click|dodge|heal|land|lunge|patter|soft|spatter|step|swing|thud|tick)$|^wp\\w+_\\w*impact|core_barehand_fallatk_impact|core_pl_charge_start|core_pl_charge_end$|wp3000_lazer_charge|pl0000_finish_charge|pl0010_blade_charge|wp3000_valcan_shot(_lv\\d)?$|pl0010_bullet_shot|core_pl_shot_stg|core_hak_pl_shot$|wp1600_default_shot|wp1700_EMP_unit_default_shot|wp3000_(lazer_shot$|lazer_shot_lv\\d$|missile_shot_lv|vacuum_shot|avoid_shot$)|pl0010_missile_shot$|pl0010_flightform_missile_shot|core_pl_missile_shot_stg|core_pl_AS_(wire_shot|black_spear_shot$|small_bom_shot$)|core_pl_gun_hit|core_hak_pl_shot_hit$|wp1700_stg_shot_hit|em\\w*_laser_tele_(L|XL)|core_stg_em_laser_m_charge|em_common_laser_tele_(L|XL)|em\\w*_laser_shot_(L|XL)|core_stg_em_laser_m_fir|core_pl_berserk_start|core_status_up|core_level_up|recovery_items_use|core_pl_body_Recover|core_pl_weapon_skill_cure|^wpf\\w+_(jump_atk_wsh|dash_atk|combo_swing_0[5-7])|core_barehand_(Dropkick|fallatk)_wsh|^wpf\\w+_|core_barehand_\\w+_wsh|pl0000_spatk_swing|pl0000_\\w*finish_wsh|pl0010_blade_swing|pl0000_unit_swing_wsh|^pl\\d+_avoidance|core_pl_avoidance|pl0010_flightform_avoidance|pl0000_jump_(first|second)|pl0000_0080_jump|core_pl_fall_land|pl0000_land_roll|^pl0000_step_(walk|run|dash)|core_pl_Mov_BushPass|core_dropitem_get|core_money_get|core_item_found|core_pl_weapon_change|core_wepon_equip|core_pl_weapon_get",
+  "sizes": [
+   [
+    "just_avoid",
+    {
+     "tail_s": 2.6,
+     "tail": 0.3
+    }
+   ],
+   [
+    "PS_critical|finish_hit|finish_\\w*impact|^fatal$",
+    {
+     "hz": 45,
+     "tail_s": 2.2,
+     "tail": 0.3
+    }
+   ],
+   [
+    "_bom|explo|_exp$|^boom$|^blast$",
+    {
+     "tail_s": 2.4,
+     "tail": 0.3,
+     "hz": 45,
+     "ms": 70
+    }
+   ],
+   [
+    "big_sword_hit|pl_blow_hit|nackle_hit|bare_hand_hit|^smash$|^blunt$",
+    {
+     "hz": 40,
+     "ms": 45
+    }
+   ],
+   [
+    "small_sword_hit|blade_hit|sword_hit_animal|^impact$",
+    {
+     "hz": 62,
+     "ms": 18
+    }
+   ],
+   [
+    "spear_hit|^pierce$",
+    {
+     "hz": 66,
+     "ms": 14
+    }
+   ],
+   [
+    "_guard|^guard$|shield_break",
+    {
+     "hz": 72,
+     "keep": 0.8
+    }
+   ],
+   [
+    "death|^down$|pl_down_",
+    {
+     "hz": 40,
+     "ms": 60
+    }
+   ]
+  ]
+ },
+ "haptic_trim": [
+  [
+   "^pl\\d+_just_avoid|core_pl_PS_Repel",
+   1.3
+  ],
+  [
+   "core_pl_PS_critical_(hit|bom)|pl0000_(finish_hit|kick_finish_impact|upper_finish_\\w+_impact|slash_finish_2nd_end)",
+   1.0
+  ],
+  [
+   "em_common_shield_break",
+   1.0
+  ],
+  [
+   "core_(small|big)_sword_guard|core_shot_guard|wp1700_shot_guard",
+   0.8
+  ],
+  [
+   "pl0000_death_down|core_stg_pl_death_bom|core_hak_pl_bom",
+   1.0
+  ],
+  [
+   "core_pl_down_(impact|bound|nobound)",
+   0.9
+  ],
+  [
+   "pl0000_vo_h_dmg|pl0000_unit_l_dmg|wp1700_EMP_unit_damage_big",
+   0.8
+  ],
+  [
+   "pl0000_vo_[lm]_dmg|pl0000_unit_s_dmg|core_pl_hack_dmg|core_stg_pl_dmg_error$|core_hak_dmg_wall",
+   0.8
+  ],
+  [
+   "core_big_sword_hit|core_pl_blow_hit",
+   1.1
+  ],
+  [
+   "core_spear_hit|core_pl_AS_black_spear_hit$",
+   0.9
+  ],
+  [
+   "core_(emil_)?nackle_hit|core_bare_hand_hit",
+   0.9
+  ],
+  [
+   "core_small_sword_hit|core_blade_hit|core_sword_hit_animal|wp1700_blade_hit",
+   0.9
+  ],
+  [
+   "em_common_death_bom_l|core_pl_destruct_exp|core_pl_berserk_exp|wp3000_common_bom|_missile_explo|pl0010_missile_bom|core_pl_weapon_skill_(comb_bom|sonicbom)|gravity_bom_exp",
+   1.0
+  ],
+  [
+   "em_common_death_bom_[sm]|core_stg_em_bom|core_hak_em(core)?_bom|wp160\\d_death_bom|small_bom_exp|slow_bom_exp",
+   0.8
+  ],
+  [
+   "^wp\\w+_\\w*impact|core_barehand_fallatk_impact",
+   0.8
+  ],
+  [
+   "wp3000_(lazer_shot$|lazer_shot_lv\\d$|missile_shot_lv|vacuum_shot|avoid_shot$)|pl0010_missile_shot$|pl0010_flightform_missile_shot|core_pl_missile_shot_stg|core_pl_AS_(wire_shot|black_spear_shot$|small_bom_shot$)",
+   0.5
+  ],
+  [
+   "em\\w*_laser_tele_(L|XL)|core_stg_em_laser_m_charge|em_common_laser_tele_(L|XL)",
+   0.4
+  ],
+  [
+   "em\\w*_laser_shot_(L|XL)|core_stg_em_laser_m_fir",
+   0.8
+  ],
+  [
+   "core_pl_berserk_start|core_status_up|core_level_up",
+   0.6
+  ],
+  [
+   "^wpf\\w+_(jump_atk_wsh|dash_atk|combo_swing_0[5-7])|core_barehand_(Dropkick|fallatk)_wsh",
+   0.65
+  ],
+  [
+   "^wpf\\w+_|core_barehand_\\w+_wsh|pl0000_spatk_swing|pl0000_\\w*finish_wsh|pl0010_blade_swing|pl0000_unit_swing_wsh",
+   0.35
+  ],
+  [
+   "core_pl_weapon_change|core_wepon_equip|core_pl_weapon_get",
+   0.5
+  ]
+ ],
+ "speaker": {
+  "gain": 0.7,
+  "all": false,
+  "allow": "^pl\\d+_just_avoid|^core_pl_avoidance$|core_pl_PS_Repel|^core_pod_window_(call|radio)$|^core_mail_call$"
+ },
+ "clips": {
+  "trees": "trees.json",
+  "hap": "hap",
+  "spk": "spk",
+  "_made": "2026-10-11 10:47 (changing this line makes the running engine read the clip folders again)"
+ },
+ "snap": "^pl\\d+_just_avoid|core_pl_PS_Repel|^pguard$|core_pl_PS_critical_(hit|bom)|pl0000_(finish_hit|kick_finish_impact|upper_finish_\\w+_impact|slash_finish_2nd_end)|^fatal$|em_common_shield_break|^stagger$",
+ "_made": "tools/new_profile.py from profiles/_model/model.json - first values, not felt yet",
+ "beds": {
+  "slide": {
+   "on": "^core_pl_slide_(start|loop)$",
+   "off": "^Stop_core_pl_slide_loop",
+   "wave": "slide",
+   "every": 0.07,
+   "vary": 0.7,
+   "max": 20
+  }
+ }
+}

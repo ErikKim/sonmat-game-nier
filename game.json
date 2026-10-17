@@ -1,0 +1,96 @@
+{
+ "name": "NieR:Automata",
+ "name_ko": "니어 오토마타",
+ "exe": "NieRAutomata.exe",
+ "engine": "wwise",
+ "event_file": "C:\\Users\\Public\\dshaptics\\events.log",
+ "_run_note": "The game reads XInput only: the DualSense needs Steam Input on. Turn the game's own vibration off. Hook = Wwise PostEvent in the running game (code is encrypted on disk), names from the public list bnnm/wwiser-utils (dll/nier/event_ids.json). Sounds = banks inside the game's archives (tools/wwise_bnk.py). Floor type arrives as a switch (SE_FloorCollisionType): its function is not hooked yet, so no ground texture.",
+ "native": {
+  "dll": "nier/dshaptics_wwise_wide.dll",
+  "event_ids": "event_ids.json",
+  "main": true
+ },
+ "player": "^(pl\\d|core_pl|wp)",
+ "slots": {
+  "parry": "^pl\\d+_just_avoid|core_pl_PS_Repel",
+  "finisher": "core_pl_PS_critical_(hit|bom)|pl0000_(finish_hit|kick_finish_impact|upper_finish_\\w+_impact|slash_finish_2nd_end)",
+  "stagger": "em_common_shield_break",
+  "guard": "core_(small|big)_sword_guard|core_shot_guard|wp1700_shot_guard",
+  "death": "pl0000_death_down|core_stg_pl_death_bom|core_hak_pl_bom",
+  "down": "core_pl_down_(impact|bound|nobound)",
+  "struck": [
+   "pl0000_vo_h_dmg|pl0000_unit_l_dmg|wp1700_EMP_unit_damage_big",
+   {
+    "drawn": true,
+    "_why": "the names that mark my damage are voice grunts: the moment is right, the sound is not a vibration"
+   }
+  ],
+  "hurt": [
+   "pl0000_vo_[lm]_dmg|pl0000_unit_s_dmg|core_pl_hack_dmg|core_stg_pl_dmg_error$|core_hak_dmg_wall",
+   {
+    "drawn": true,
+    "_why": "the names that mark my damage are voice grunts: the moment is right, the sound is not a vibration"
+   }
+  ],
+  "hit_heavy": "core_big_sword_hit|core_pl_blow_hit",
+  "hit_pierce": "core_spear_hit|core_pl_AS_black_spear_hit$",
+  "hit_blunt": "core_(emil_)?nackle_hit|core_bare_hand_hit",
+  "hit": "core_small_sword_hit|core_blade_hit|core_sword_hit_animal|wp1700_blade_hit",
+  "boom": "em_common_death_bom_l|core_pl_destruct_exp|core_pl_berserk_exp|wp3000_common_bom|_missile_explo|pl0010_missile_bom|core_pl_weapon_skill_(comb_bom|sonicbom)|gravity_bom_exp",
+  "blast": "em_common_death_bom_[sm]|core_stg_em_bom|core_hak_em(core)?_bom|wp160\\d_death_bom|small_bom_exp|slow_bom_exp",
+  "slam": "^wp\\w+_\\w*impact|core_barehand_fallatk_impact",
+  "charge": "core_pl_charge_start|core_pl_charge_end$|wp3000_lazer_charge|pl0000_finish_charge|pl0010_blade_charge",
+  "shot": "wp3000_(lazer_shot$|lazer_shot_lv\\d$|missile_shot_lv|vacuum_shot|avoid_shot$)|pl0010_missile_shot$|pl0010_flightform_missile_shot|core_pl_missile_shot_stg|core_pl_AS_(wire_shot|black_spear_shot$|small_bom_shot$)",
+  "buff": "core_pl_berserk_start|core_status_up|core_level_up",
+  "heal": "recovery_items_use|core_pl_body_Recover|core_pl_weapon_skill_cure",
+  "swing_heavy": "^wpf\\w+_(jump_atk_wsh|dash_atk|combo_swing_0[5-7])|core_barehand_(Dropkick|fallatk)_wsh",
+  "swing": "^wpf\\w+_|core_barehand_\\w+_wsh|pl0000_spatk_swing|pl0000_\\w*finish_wsh|pl0010_blade_swing|pl0000_unit_swing_wsh",
+  "dodge": "^pl\\d+_avoidance|pl0010_flightform_avoidance",
+  "jump": "pl0000_jump_(first|second)|pl0000_0080_jump",
+  "land": "core_pl_fall_land|pl0000_land_roll",
+  "step": "^pl0000_step_(walk|run|dash)",
+  "touch": "core_pl_Mov_BushPass|core_dropitem_get|core_money_get|core_item_found",
+  "click": "core_pl_weapon_change|core_wepon_equip|core_pl_weapon_get",
+  "stream": "wp3000_valcan_shot(_lv\\d)?$|pl0010_bullet_shot|core_pl_shot_stg|core_hak_pl_shot$|wp1600_default_shot|wp1700_EMP_unit_default_shot",
+  "shot_hit": "core_pl_gun_hit|core_hak_pl_shot_hit$|wp1700_stg_shot_hit",
+  "telegraph": "em\\w*_laser_tele_(L|XL)|core_stg_em_laser_m_charge|em_common_laser_tele_(L|XL)",
+  "beam": "em\\w*_laser_shot_(L|XL)|core_stg_em_laser_m_fir",
+  "scene": "^ev\\d+_Se$"
+ },
+ "extra_rules": [
+  {
+   "match": "^Stop_",
+   "_note": "Wwise stop events carry the name of what they stop: never a vibration"
+  }
+ ],
+ "_controls_note": "Default pad layout (from general knowledge of the game, not read from this install): square = light attack, triangle = heavy attack, cross = jump, R1 = pod fire (held), L1 = pod program, R2 = evade, L2 = lock-on. Modes besides 3D action: side / top-down camera sections (same sounds), flight unit shooting (pl0010_*, core_stg_*), hacking twin-stick shooter (core_hak_*).",
+ "triggers": {
+  "_note": "R2 = evade: nothing is held there, so only the perfect evade answers on the trigger (a short kick). First value, not felt.",
+  "just_evade": {
+   "match": "^pl\\d+_just_avoid",
+   "pad": "R2",
+   "effect": "vibrate",
+   "amp": 8,
+   "hz": 9,
+   "hold": 0.13
+  }
+ },
+ "source": {
+  "_note": "tools/soundprep.py nier: banks found inside the user's own game archives (no key), events -> sounds read from the banks, names from the public list",
+  "type": "wwise_bnk",
+  "steam_dir": "NieRAutomata",
+  "data": "data",
+  "event_ids": "event_ids.json",
+  "trees": "trees.json",
+  "hap": "hap",
+  "spk": "spk"
+ },
+ "scenes": {
+  "trees": "trees_seq.json",
+  "dir": "seq"
+ },
+ "cutscene": {
+  "end": "^ev\\d+_End$|^se_movie_out$",
+  "_note": "every cutscene posts ev####_Se (its whole effects bed) and ev####_Vo; many post ev####_End when over, and a movie closing posts se_movie_out (seen in the title's attract loop, 10-09). Otherwise the track ends when my own steps / attacks come back"
+ }
+}
