@@ -1,0 +1,14 @@
+{
+ "_about": "게임 연결: 이 게임을 분석해서 얻은 값 전부(훅 DLL·바이트 패턴·UE4SS 와 이 빌드에 필요한 것). tools/hooks.py 가 이것만 보고 게임 폴더에 파일을 통째로 쓴다(sonmat_paths.load_hook)",
+ "native": {
+  "dll": "dshaptics_wwise_wide.dll",
+  "event_ids": "event_ids.json",
+  "main": true,
+  "sigs": {
+   "_note": "NieR:Automata (Steam, 2021 build). Found 2026-10-09 in the running game (code is encrypted on disk): the by-ID PostEvent that the by-name overload calls after hashing the name. AK::SoundEngine::SetRTPCValue(id, value, object, time, curve, bool) by ID - found 2026-10-15 offline in a Steamless copy of the exe: the game's floor code passes \"SE_FloorCollisionType\" + the floor number -> name to ID -> this. only these game parameters get a line: SE_FloorCollisionType",
+   "PostEvent": "48 89 74 24 20 41 54 41 56 41 57 48 83 EC 30 4C 8B E2 4D 8B F1 8B D1 45 8B F8",
+   "SetRTPC": "48 83 EC 48 0F B6 44 24 78 88 44 24 30 8B 44 24 70 89 44 24 28 44 89 4C 24 20 45 33",
+   "RtpcIds": "3721202454"
+  }
+ }
+}

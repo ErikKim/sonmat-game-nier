@@ -5,10 +5,12 @@
  "engine": "wwise",
  "event_file": "C:\\Users\\Public\\dshaptics\\events.log",
  "_run_note": "The game reads XInput only: the DualSense needs Steam Input on. Turn the game's own vibration off. Hook = Wwise PostEvent in the running game (code is encrypted on disk), names from the public list bnnm/wwiser-utils (dll/nier/event_ids.json). Sounds = banks inside the game's archives (tools/wwise_bnk.py). Floor type arrives as a switch (SE_FloorCollisionType): its function is not hooked yet, so no ground texture.",
- "native": {
-  "dll": "nier/dshaptics_wwise_wide.dll",
-  "event_ids": "event_ids.json",
-  "main": true
+ "hook": {
+  "native": {
+   "dll": "dshaptics_wwise_wide.dll",
+   "event_ids": "event_ids.json",
+   "main": true
+  }
  },
  "player": "^(pl\\d|core_pl|wp)",
  "slots": {
