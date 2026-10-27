@@ -361,22 +361,6 @@
     12
    ]
   ],
-  "ground": [
-   [
-    65,
-    35,
-    0.15,
-    14
-   ]
-  ],
-  "splash": [
-   [
-    110,
-    40,
-    0.12,
-    15
-   ]
-  ],
   "charge": [
    [
     100,
@@ -410,14 +394,6 @@
     ]
    }
   ],
-  "uitick": [
-   [
-    220,
-    8,
-    0.15,
-    3
-   ]
-  ],
   "click": [
    [
     180,
@@ -439,14 +415,6 @@
     260,
     0.4,
     110
-   ]
-  ],
-  "break": [
-   [
-    80,
-    120,
-    0.5,
-    50
    ]
   ],
   "boom": [
@@ -477,14 +445,6 @@
     160,
     0.3,
     70
-   ]
-  ],
-  "whoosh": [
-   [
-    120,
-    60,
-    0.35,
-    25
    ]
   ],
   "soft": [
@@ -825,7 +785,8 @@
    "wave": "brush",
    "who": "any",
    "_slot": "brush",
-   "player_control": true
+   "player_control": true,
+   "side": 0.8
   },
   {
    "match": "core_dropitem_get|core_money_get|core_item_found",
@@ -858,19 +819,14 @@
   "dodge": "dash",
   "land": "land_heavy",
   "step": "step",
-  "ground": "step",
-  "splash": "step_water",
   "charge": "charged",
   "heal": "heal",
   "buff": "buff",
-  "uitick": "uitick",
   "click": "click",
   "thud": "thud",
-  "break": "hit_wood",
   "boom": "blast",
   "blast": "blast",
   "seq": "hit_s",
-  "whoosh": "swing_l",
   "soft": "item",
   "warn": "riser",
   "jump": "jump",
