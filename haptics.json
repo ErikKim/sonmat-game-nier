@@ -102,7 +102,7 @@
   "type": "wwise_bnk",
   "steam_dir": "NieRAutomata",
   "data": "data",
-  "event_ids": "event_ids.json",
+  "event_ids": "event_ids.json", "auto_rules": "rules_auto.json",
   "trees": "trees.json",
   "hap": "hap",
   "spk": "spk",
