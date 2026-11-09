@@ -5,7 +5,7 @@
  "steam_input": "on",
  "engine": "wwise",
  "event_file": "C:\\Users\\Public\\dshaptics\\events.log",
- "player": "^(pl\\d|core_pl|wp)",
+ "player": "^pl\\d+_(mov_start|dash_end|dash_start_lp|mov_back_stance|wait_lp)$",
  "trigger_rest": {},
  "trigger_cooldown": {
   "L2": {"after": "^core_pl_AS_(black_spear_shot|small_bom_shot|wire_shot|pod_throw_wsh|pod_throw_ring_laser_shot|barrier_start|black_Whirling_start|black_hand_gene|black_gluttony_start|black_illusion_lv\\d|black_exec_start|gravity_bom_loop_lv\\d|slow_bom_loop_lv\\d|hologram_loop|body_recovery_loop|pod_ride_start)$",
@@ -593,7 +593,14 @@
    "combat": true
   },
   {
-   "match": "pl0000_death_down|core_stg_pl_death_bom|core_hak_pl_bom",
+   "match": "^pl\\d+_death_down",
+   "wave": "death",
+   "who": "me",
+   "_slot": "death",
+   "combat": true
+  },
+  {
+   "match": "core_stg_pl_death_bom|core_hak_pl_bom",
    "wave": "death",
    "who": "any",
    "_slot": "death",
@@ -607,7 +614,15 @@
    "combat": true
   },
   {
-   "match": "pl0000_vo_h_dmg|pl0000_unit_l_dmg|wp1700_EMP_unit_damage_big",
+   "match": "^pl\\d+_(vo_h_dmg|unit_l_dmg)",
+   "wave": "struck",
+   "who": "me",
+   "_slot": "struck",
+   "combat": true,
+   "synth": true
+  },
+  {
+   "match": "wp1700_EMP_unit_damage_big",
    "wave": "struck",
    "who": "any",
    "_slot": "struck",
@@ -615,7 +630,15 @@
    "synth": true
   },
   {
-   "match": "pl0000_vo_[lm]_dmg|pl0000_unit_s_dmg|core_pl_hack_dmg|core_stg_pl_dmg_error$|core_hak_dmg_wall",
+   "match": "^pl\\d+_(vo_[lm]_dmg|unit_s_dmg)",
+   "wave": "hurt",
+   "who": "me",
+   "_slot": "hurt",
+   "combat": true,
+   "synth": true
+  },
+  {
+   "match": "core_pl_hack_dmg|core_stg_pl_dmg_error$|core_stg_pl_dmg_(fire|spark|error)_loop$|core_hak_dmg_wall",
    "wave": "hurt",
    "who": "any",
    "_slot": "hurt",
@@ -729,7 +752,15 @@
    "player_control": true
   },
   {
-   "match": "^wpf\\w+_|core_barehand_\\w+_wsh|pl0000_spatk_swing|pl0000_\\w*finish_wsh|pl0010_blade_swing|pl0000_unit_swing_wsh",
+   "match": "^pl\\d+_(spatk_swing|\\w*finish_wsh|blade_swing|unit_swing_wsh)",
+   "wave": "swing",
+   "who": "me",
+   "_slot": "swing",
+   "combat": true,
+   "player_control": true
+  },
+  {
+   "match": "^wpf\\w+_|core_barehand_\\w+_wsh",
    "wave": "swing",
    "who": "any",
    "_slot": "swing",
@@ -737,22 +768,29 @@
    "player_control": true
   },
   {
-   "match": "^pl\\d+_avoidance|pl0010_flightform_avoidance",
+   "match": "^pl\\d+_(flightform_)?avoidance",
    "wave": "dodge",
-   "who": "any",
+   "who": "me",
    "_slot": "dodge",
    "combat": true,
    "player_control": true
   },
   {
-   "match": "pl0000_jump_(first|second)|pl0000_0080_jump",
+   "match": "^pl\\d+_(jump_(first|second)|0080_jump)",
    "wave": "jump",
-   "who": "any",
+   "who": "me",
    "_slot": "jump",
    "player_control": true
   },
   {
-   "match": "core_pl_fall_land|pl0000_land_roll",
+   "match": "^pl\\d+_land_roll",
+   "wave": "land",
+   "who": "me",
+   "_slot": "land",
+   "player_control": true
+  },
+  {
+   "match": "core_pl_fall_land",
    "wave": "land",
    "who": "any",
    "_slot": "land",
@@ -767,7 +805,7 @@
   {
    "match": "^pl0000_step_dash",
    "wave": "step_dash",
-   "who": "any",
+   "who": "me",
    "_slot": "step_dash",
    "player_control": true,
    "synth": true
@@ -775,7 +813,7 @@
   {
    "match": "^pl0000_step_run",
    "wave": "step",
-   "who": "any",
+   "who": "me",
    "_slot": "step",
    "combat_only": true,
    "player_control": true,
@@ -922,7 +960,7 @@
    0.8
   ],
   [
-   "pl0000_death_down|core_stg_pl_death_bom|core_hak_pl_bom",
+   "pl\\d+_death_down|core_stg_pl_death_bom|core_hak_pl_bom",
    1.0
   ],
   [
@@ -930,11 +968,11 @@
    0.9
   ],
   [
-   "pl0000_vo_h_dmg|pl0000_unit_l_dmg|wp1700_EMP_unit_damage_big",
+   "pl\\d+_vo_h_dmg|pl\\d+_unit_l_dmg|wp1700_EMP_unit_damage_big",
    0.8
   ],
   [
-   "pl0000_vo_[lm]_dmg|pl0000_unit_s_dmg|core_pl_hack_dmg|core_stg_pl_dmg_error$|core_hak_dmg_wall",
+   "pl\\d+_vo_[lm]_dmg|pl\\d+_unit_s_dmg|core_pl_hack_dmg|core_stg_pl_dmg_error$|core_stg_pl_dmg_(fire|spark|error)_loop$|core_hak_dmg_wall",
    0.8
   ],
   [
@@ -986,7 +1024,7 @@
    0.65
   ],
   [
-   "^wpf\\w+_|core_barehand_\\w+_wsh|pl0000_spatk_swing|pl0000_\\w*finish_wsh|pl0010_blade_swing|pl0000_unit_swing_wsh",
+   "^wpf\\w+_|core_barehand_\\w+_wsh|pl\\d+_(spatk_swing|\\w*finish_wsh|blade_swing|unit_swing_wsh)",
    0.35
   ],
   [
